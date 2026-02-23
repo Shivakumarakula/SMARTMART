@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Clone TTS</title>
+</head>
+<body>
+    <h2>Voice Clone Text to Speech</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Upload Voice Sample (wav/mp3):</label><br>
+        <input type="file" name="audio_file" accept="audio/*" required><br><br>
+
+        <label>Enter Text:</label><br>
+        <input type="text" name="text_input" placeholder="Enter text here" required style="width:300px;"><br><br>
+
+        <button type="submit">Generate Audio</button>
+    </form>
+
+    {% if output_audio %}
+        <h3>Generated Audio:</h3>
+        <audio controls>
+            <source src="{{ output_audio }}" type="audio/wav">
+        </audio>
+        <br>
+        <a href="{{ output_audio }}" download>Download</a>
+    {% endif %}
+</body>
+</html> 
